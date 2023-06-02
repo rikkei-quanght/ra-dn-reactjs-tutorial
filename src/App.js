@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import Child from './Child'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { age: 26, isShowChild: true }
+    console.log('app constructor')
+    this.handleChangeAge = this.handleChangeAge.bind(this)
+  }
+
+  componentWillMount() {
+    console.log('app componentWillMount')
+  }
+
+  handleChangeAge() {
+    this.setState({
+      age: 29
+    });
+  }
+
+  toogleShowChild() {
+    console.log('toogleShowChild')
+    this.setState({
+      isShowChild: !this.state.isShowChild
+    })
+  }
+
+  render() {
+    console.log('app render')
+    return (
+      <>
+        <h1>App component</h1>
+        <button onClick={this.handleChangeAge}>Change age</button>
+        <button onClick={this.toogleShowChild.bind(this)}>Toggle show child</button>
+        {this.state.isShowChild ? <Child age={this.state.age}/> : null}
+      </>
+    );
+  }
+
+  componentDidMount() {
+    console.log('app componentDidMount')
+  }
 }
 
 export default App;
