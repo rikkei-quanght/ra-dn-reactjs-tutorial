@@ -4,23 +4,31 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      currentTime: ''
+      currentTime: new Date(),
+      intervalId: null,
     }
   }
 
   render() {
-    let datetime = new Date();
-
-    setInterval(function() {
-      datetime = new Date();
-    }, 1000);
-
     return (
       <div>
         <h1>Đồng hồ</h1>
-        {datetime.toLocaleTimeString()}
+        {this.state.currentTime.toLocaleTimeString()}
       </div>
     );
+  }
+
+  tick = () => {
+    this.setState({ currentTime: new Date() })
+  }
+
+  componentDidMount() {
+    let intervalId = setInterval(this.tick, 1000);
+    this.setState({ intervalId: intervalId })
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.intervalId);
   }
 }
 
