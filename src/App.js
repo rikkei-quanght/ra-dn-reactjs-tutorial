@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react'
 
 function App() {
+  const [count, setCount] = useState(0)
+  const [count2, setCount2] = useState(0)
+
+  // Khai báo nhiều state
+  const [state, setState] = useState({ count: 0, count2: 0 })
+
+  useEffect(function () {
+    document.title = `You clicked ${count} times`
+    console.log('useEffect')
+  }, [count])
+
+  const handleIncrease = () => {
+    setCount(count + 1)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>You clicked {count} times</h1>
+      <button onClick={handleIncrease}>Click me</button>
     </div>
   );
 }
