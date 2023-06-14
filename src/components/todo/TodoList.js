@@ -12,13 +12,19 @@ class TodoList extends React.Component {
             todoList: [],
             show: false,
             searchKeyWord: '',
+            todo: {}
         }
     }
 
-    toggleShowModal = () => {
-        this.setState({
+    toggleShowModal = async () => {
+        await this.setState({
             show: !this.state.show
         })
+        if (!this.state.show) {
+            await this.setState({
+                todo: {}
+            })
+        }
     }
 
     handleAdd = async (newTodo) => {
@@ -48,19 +54,39 @@ class TodoList extends React.Component {
             });
 
             // Lấy giá trị ID lớn nhất trong mảng idList
-            const maxId = Math.max(idList);
+            const maxId = Math.max(...idList);
 
             // Trả về next ID: ID lớn nhất trong danh sách todoList + 1
             return maxId + 1;
         }
     }
 
-    handleEdit = (index) => {
-
+    handleEdit = async (todo) => {
+        await this.setState({
+            // todo OR todo: todo
+            todo: todo
+        })
+        this.toggleShowModal();
     }
 
-    handleDelete = async (index) => {
-        const newTodoList = this.state.todoList.slice(index, 1);
+    handleUpdate = (todoUpdate) => {
+        const newTodoList = this.state.todoList.map((todo) => {
+            if (todo.id == todoUpdate.id) {
+                return todoUpdate;
+            } else {
+                return todo;
+            }
+        })
+        this.setState({
+            todoList: newTodoList
+        })
+        this.toggleShowModal();
+    }
+
+    handleDelete = async (id) => {
+        const newTodoList = this.state.todoList.filter((todo) => {
+            return todo.id !== id
+        })
         await this.setState({
             todoList: newTodoList
         })
@@ -72,7 +98,48 @@ class TodoList extends React.Component {
         });
     }
 
+    handleFinished = async (event, id) => {
+        const isChecked = event.target.checked;
+        const newTodoList = this.state.todoList.map((todo) => {
+            if (todo.id == id) {
+                return {
+                    ...todo,
+                    updatedAt: new Date(),
+                    finishedAt: isChecked ? new Date() : null,
+                    isFinished: isChecked,
+                };
+            } else {
+                return todo;
+            }
+        })
+        await this.setState({
+            todoList: newTodoList
+        })
+        console.log(this.state.todoList)
+    }
+
     render() {
+        const todoList = this.state.todoList.map((todo, index) => {
+            return (todo.name.toLowerCase().includes(this.state.searchKeyWord.toLowerCase()) && (
+                <tr key={index}>
+                    <td>
+                        <input type="checkbox"
+                            checked={todo.isFinished}
+                            onChange={(e) => this.handleFinished(e, todo.id)} />
+                    </td>
+                    <td>{todo.id}</td>
+                    <td>{todo.name}</td>
+                    <td>{todo.createdAt && moment(todo.createdAt).format('YYYY-MM-DD HH:mm:ss')}</td>
+                    <td>{todo.updatedAt && moment(todo.updatedAt).format('YYYY-MM-DD HH:mm:ss')}</td>
+                    <td>{todo.finishedAt && moment(todo.finishedAt).format('YYYY-MM-DD HH:mm:ss')}</td>
+                    <td>
+                        <Button variant="warning" onClick={() => this.handleEdit(todo)}>Sửa</Button>&nbsp;
+                        <Button variant="danger" onClick={() => this.handleDelete(todo.id)}>Xóa</Button>
+                    </td>
+                </tr>
+            ))
+        });
+
         return (
             <div>
                 <h1>Danh sách việc cần làm</h1>
@@ -91,34 +158,15 @@ class TodoList extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.todoList.map((todo, index) => {
-                            return (
-                                <>
-                                    {todo.name.toLowerCase().includes(this.state.searchKeyWord.toLowerCase()) && (
-                                        <tr>
-                                            <td>
-                                                <Form.Check type="checkbox" />
-                                            </td>
-                                            <td>{todo.id}</td>
-                                            <td>{todo.name}</td>
-                                            <td>{moment(todo.createdAt).format('YYYY-MM-DD HH:mm:ss')}</td>
-                                            <td>{moment(todo.updatedAt).format('YYYY-MM-DD HH:mm:ss')}</td>
-                                            <td>{moment(todo.finishedAt).format('YYYY-MM-DD HH:mm:ss')}</td>
-                                            <td>
-                                                <Button variant="warning" onClick={() => this.handleEdit(index)}>Sửa</Button>&nbsp;
-                                                <Button variant="danger" onClick={() => this.handleDelete(index)}>Xóa</Button>
-                                            </td>
-                                        </tr>
-                                    )}
-                                </>
-                            );
-                        })}
+                        {todoList}
                     </tbody>
                 </Table>
                 <Button variant="primary" onClick={this.toggleShowModal}>Thêm mới</Button>
-                <TodoForm show={this.state.show}
+                {this.state.show && <TodoForm show={this.state.show}
                     toggleShowModal={this.toggleShowModal}
-                    handleAdd={this.handleAdd} />
+                    handleAdd={this.handleAdd}
+                    todo={this.state.todo}
+                    handleUpdate={this.handleUpdate} />}
             </div>
         );
     }
