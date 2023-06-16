@@ -1,5 +1,6 @@
 const initState = {
     count: 3,
+    // todos: []
 }
 
 const countReducer = (state = initState, action) => {
@@ -9,6 +10,7 @@ const countReducer = (state = initState, action) => {
             return {
                 // ...state
                 count: state.count + action.payload
+                // todo: action.payload // {name: 'task 1', isFinished: false}
             }
         case 'DOWN_COUNT':
             console.log('countReducer', 'DOWN_COUNT')

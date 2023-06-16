@@ -1,4 +1,5 @@
 import {useSelector, useDispatch} from 'react-redux'
+import { upCount, downCount } from '../actions/countAction';
 
 export default function Count() {
     const count = useSelector(state => state.count)
@@ -6,18 +7,12 @@ export default function Count() {
 
     // Tăng count thêm 1 giá trị
     const handleUp = () => {
-        dispatch({
-            type: 'UP_COUNT',
-            payload: 1
-        });
+        dispatch(upCount(1));
     }
 
     // Giảm count xuống 1 giá trị
     const handleDown = () => {
-        dispatch({
-            type: 'DOWN_COUNT',
-            payload: 1
-        });
+        dispatch(downCount(1));
     }
 
     return (
