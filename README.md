@@ -44,5 +44,8 @@ npm install react-router-dom
 import CSS `import 'bootstrap/dist/css/bootstrap.min.css';` vào file App.js hoặc index.js
 
 ## 4. Đổ dữ liệu
+- Đổ danh sách sản phẩm
+- Đổ dữ liệu giỏ hàng
 
 ## 5. Xử lý sự kiện
+- Xử lý thêm sản phẩm vào giỏ hàng

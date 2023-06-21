@@ -26,7 +26,6 @@ const getRows = (products) => {
 function ProductList() {
     const products = useSelector(state => state.productReducer.products)
     const rows = getRows(products)
-    console.log(rows)
 
     return (
         <>
