@@ -1,7 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 
 function App() {
+  // Ví dụ axios với method GET
+  axios.get('https://jsonplaceholder.typicode.com/todos/1')
+    .then(response => console.log(response.data))
+
+  // Ví dụ axios với method POST
+  axios.post('https://jsonplaceholder.typicode.com/posts', {username: 'Nguyễn Trung Tín'})
+    .then(response => console.log(response.data))
+    
   return (
     <div className="App">
       <header className="App-header">
