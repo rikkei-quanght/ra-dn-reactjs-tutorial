@@ -2,6 +2,23 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  // Ví dụ fetch
+  fetch('https://jsonplaceholder.typicode.com/todos/1')
+      .then(response => response.json())
+      .then(json => console.log(json))
+
+  // Ví dụ fetch với method POST
+  const data = {username: 'Nguyễn Thành Trung'}
+
+  fetch('https://jsonplaceholder.typicode.com/posts', {
+    method: 'POST',
+    body: JSON.stringify(data)
+  })
+    .then(response => {
+      return response.json()
+    })
+    .then(json => console.log(json))
+
   return (
     <div className="App">
       <header className="App-header">
