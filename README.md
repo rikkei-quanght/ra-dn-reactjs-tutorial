@@ -39,6 +39,9 @@ npm install react-router-dom
 - createStore()
 
 #### 3.2.3. Tạo action
+- Thêm sản phẩm vào giỏ hàng (ADD_TO_CART)
+- Xóa sản phẩm trong giỏ hàng (DELETE_FROM_CART)
+- Thay đổi số lượng đặt hàng cho từng sản phẩm (CHANGE_QUANTITY)
 
 ### 3.3. Cấu hình react-bootstrap
 import CSS `import 'bootstrap/dist/css/bootstrap.min.css';` vào file App.js hoặc index.js
@@ -46,6 +49,10 @@ import CSS `import 'bootstrap/dist/css/bootstrap.min.css';` vào file App.js ho�
 ## 4. Đổ dữ liệu
 - Đổ danh sách sản phẩm
 - Đổ dữ liệu giỏ hàng
+- Hiển thị số lượng sản phẩm đã đặt trong giỏ hàng (hiển thị bên cạnh nút giỏ hàng)
+- Hiển thị tổng giá
 
 ## 5. Xử lý sự kiện
 - Xử lý thêm sản phẩm vào giỏ hàng
+- Xử lý sự kiện xóa sản phẩm trong giỏ hàng
+- Xử lý sự kiện thay đổi số lượng đặt hàng cho từng sản phẩm
