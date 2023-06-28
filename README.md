@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+# Ứng dụng hiển thị danh sách bài viết
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Đề bài:
+- Sử dụng ReactJS + Redux Toolkit + Axios để hiển thị danh sách bài viết từ API
+- API: https://jsonplaceholder.typicode.com/posts
+- Ứng dụng thêm: React Bootstrap + React Router
 
-## Available Scripts
+### 2. Các bước thực hiện
+#### 2.1. Cài đặt các thư viện
+##### 2.1.1. React Bootstrap
+```
+npm install bootstrap react-bootstrap
+```
 
-In the project directory, you can run:
+##### 2.1.2. Redux
+```
+npm install redux react-redux
+```
 
-### `npm start`
+##### 2.1.3. Redux Toolkit
+```
+npm install @reduxjs/toolkit
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+##### 2.1.4. Axios (thư viện hỗ trợ gọi API)
+```
+npm install axios
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+##### 2.1.5. React Router
+```
+npm install react-router-dom
+```
 
-### `npm test`
+#### 2.2. Cấu hình các thư viện
+##### 2.2.1. React bootstrap
+```js
+{
+  /* The following line can be included in your src/index.js or App.js file */
+}
+import 'bootstrap/dist/css/bootstrap.min.css';
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+##### 2.2.2. React router
+import BrowserRouter và bao thẻ App ở file `index.js`
 
-### `npm run build`
+##### 2.2.3. React redux toolkit
+- Tạo reducers
+- Tạo store
+- Tạo actions
+- import `Provider` và set thuộc tính `store` - bao thẻ App
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### 2.3. Dựng UI
+- Dựng PostList component
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### 2.4. Lấy dữ liệu từ API
+- import axios
+- Dùng axios gọi API https://jsonplaceholder.typicode.com/posts
+- Gán giá trị vào store
+- ProductList component: đổ dữ liệu ra
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### 2.5. Đổ dữ liệu ra giao diện
